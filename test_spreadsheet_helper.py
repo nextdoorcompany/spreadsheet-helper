@@ -20,7 +20,11 @@ def header_on_row_two_worksheet():
 
 @pytest.fixture
 def start_on_col_two_worksheet():
-	return 'test.xlsx', 'colrow2'		
+	return 'test.xlsx', 'colrow2'	
+
+@pytest.fixture
+def two_line_header_worksheet():
+	return 'test.xlsx', 'twolineheader'		
 
 def test_read_blank(blank_worksheet):
 	filename, sheetname = blank_worksheet
@@ -68,4 +72,12 @@ def test_read_start_col_two(start_on_col_two_worksheet):
 	assert result[1]['uid'] == 2
 	assert result[1]['uname'] == ''	
 	assert result[2]['uid'] == 3
-	assert result[2]['uname'] == 'henry'		
+	assert result[2]['uname'] == 'henry'
+
+def test_read_two_line_header(two_line_header_worksheet):
+	filename, sheetname = two_line_header_worksheet
+	result = spreadsheet_helper.read_with_headers(filename, sheetname)
+
+	assert len(result) == 1
+	assert result[0]['twolines'] == 4
+		
