@@ -10,7 +10,7 @@ def read_with_headers(filename, sheetname, header_row=1, start_col=1):
 	headers = {}
 	while sheet.cell(row=header_row, column=c).value:
 		header_val = str(sheet.cell(row=header_row, column=c).value)
-		headers[c] = header_val.replace('\n', '')
+		headers[c] = header_val.replace('\n', '').replace('\\', '').replace("'", '').replace('"', '').replace(' ', '')
 		c += 1
 	max_col = c
 	max_row = sheet.max_row

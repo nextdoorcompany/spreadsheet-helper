@@ -80,4 +80,5 @@ def test_read_two_line_header(two_line_header_worksheet):
 
 	assert len(result) == 1
 	assert result[0]['twolines'] == 4
+	assert result[0]['ma'] == 3
 		
